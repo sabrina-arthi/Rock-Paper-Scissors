@@ -4,109 +4,154 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .choices {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .choice {
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .choice:hover {
+            background-color: #ddd;
+            transform: scale(1.1);
+        }
+        .result {
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+        .score {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            display: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .popup h2 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+        .popup button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+        }
+        .popup button:hover {
+            background-color: #555;
+        }
+    </style>
 </head>
 <body>
-    <p>
-        Rock Paper Scissors
-    </p>
-    <button onclick="
-   const randomNumber=Math.random();
-   let computerMove ='';
-   if(randomNumber>=0&& randomNumber<1/3 ) {
-     computerMove ='rock';
+    <div class="container">
+        <h1>Rock Paper Scissors</h1>
+        <div class="choices">
+            <div class="choice" data-choice="rock">✊ Rock</div>
+            <div class="choice" data-choice="paper">✋ Paper</div>
+            <div class="choice" data-choice="scissors">✌️ Scissors</div>
+        </div>
+        <div class="result">Make your choice!</div>
+        <div class="score">Player: 0 | Computer: 0</div>
+    </div>
 
-   } else if (randomNumber>=1/3&&randomNumber<2/3){
-     computerMove ='paper';
+    <div class="popup" id="popup">
+        <h2 id="popup-message"></h2>
+        <button id="close-popup">Close</button>
+    </div>
 
-   } else if(randomNumber>=2/3 &&randomNumber<1){
-
-     computerMove ='scissors';
-   }
-   console.log(computerMove);
-   let result ='';
-   if ( computerMove=='rock') {
-   result = 'tie'
-   } else if (computerMove=='paper') {
-    result ='you lose';
-   } else if(computerMove=='scissors') {
-    result ='you win';
-   }
-    alert(`you picked rock.Computer picked${computerMove}.${result}`);
-    ">
-        rock
-    </button>
-    <button onclick="
-    
-    const randomNumber=Math.random();
-   let computerMove ='';
-   if(randomNumber>=0&& randomNumber<1/3 ) {
-     computerMove ='rock';
-
-   } else if (randomNumber>=1/3&&randomNumber<2/3){
-     computerMove ='paper';
-
-   } else if(randomNumber>=2/3 &&randomNumber<1){
-
-     computerMove ='scissors';
-     
-   }
-   console.log(computerMove);
-   let result ='';
-   if ( computerMove=='rock') {
-   result = 'you win';
-   } else if (computerMove=='paper') {
-    result ='tie';
-   } else if(computerMove=='scissors') {
-    result ='you lose';
-   }
-    alert(`you picked paper.Computer picked${computerMove}.${result}`);   
-    
-    
-    
-    
-    
-    
-    
-    ">paper</button>
-    <button onclick="
-    pickComputerMove();
-    
-    
-  
-   let result ='';
-   if ( computerMove=='rock') {
-   result = 'you lose';
-   } else if (computerMove=='paper') {
-    result ='you win';
-   } else if(computerMove=='scissors') {
-    result ='tie';
-   }
-    alert(`you picked scissors.Computer picked${computerMove}.${result}`);   
-    
-    ">
-        scissors
-    </button>
     <script>
-        let computerMove ='';
-        function pickComputerMove() {
+        const choices = document.querySelectorAll('.choice');
+        const resultDiv = document.querySelector('.result');
+        const scoreDiv = document.querySelector('.score');
+        const popup = document.getElementById('popup');
+        const popupMessage = document.getElementById('popup-message');
+        const closePopupButton = document.getElementById('close-popup');
 
-            const randomNumber=Math.random();
-   
-   if(randomNumber>=0&& randomNumber<1/3 ) {
-     computerMove ='rock';
+        let playerScore = 0;
+        let computerScore = 0;
 
-   } else if (randomNumber>=1/3&&randomNumber<2/3){
-     computerMove ='paper';
+        const getComputerChoice = () => {
+            const options = ['rock', 'paper', 'scissors'];
+            return options[Math.floor(Math.random() * options.length)];
+        };
 
-   } else if(randomNumber>=2/3 &&randomNumber<1){
+        const determineWinner = (playerChoice, computerChoice) => {
+            if (playerChoice === computerChoice) {
+                return "It's a tie";
+            } else if (
+                (playerChoice === 'rock' && computerChoice === 'scissors') ||
+                (playerChoice === 'paper' && computerChoice === 'rock') ||
+                (playerChoice === 'scissors' && computerChoice === 'paper')
+            ) {
+                playerScore++;
+                return 'You win!';
+            } else {
+                computerScore++;
+                return 'Computer wins!';
+            }
+        };
 
-     computerMove ='scissors';
-   }
+        const checkForGameEnd = () => {
+            if (playerScore === 5 || computerScore === 5) {
+                const message = playerScore === 5 ? 'Congratulations! You won the game!' : 'Oh no! The computer won the game!';
+                popupMessage.textContent = message;
+                popup.style.display = 'block';
+                playerScore = 0;
+                computerScore = 0;
+            }
+        };
 
+        choices.forEach(choice => {
+            choice.addEventListener('click', () => {
+                const playerChoice = choice.getAttribute('data-choice');
+                const computerChoice = getComputerChoice();
+                const result = determineWinner(playerChoice, computerChoice);
+                
+                resultDiv.textContent = `You chose ${playerChoice}, computer chose ${computerChoice}. ${result}`;
+                scoreDiv.textContent = `Player: ${playerScore} | Computer: ${computerScore}`;
 
-        }
+                checkForGameEnd();
+            });
+        });
+
+        closePopupButton.addEventListener('click', () => {
+            popup.style.display = 'none';
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+    closePopupButton.addEventListener('click', () => {
+        popup.style.display = 'none';
+    });
+});
 
     </script>
-    
 </body>
 </html>
