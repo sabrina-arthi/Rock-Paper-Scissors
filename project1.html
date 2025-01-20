@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halloween Food</title>
+    <style>
+        .me{
+            background-color: black;
+        }
+        .you{
+            color: orangered;
+            font-size: xx-large;
+            font-family: 'Times New Roman', Times, serif;
+            text-align: center;
+        }
+        .vk{
+            color: goldenrod;
+            text-align: center;
+            font-size: large;
+        }
+        .rc{
+            color: azure;
+            text-align: center;
+            margin-top: 0;
+            
+        }
+        .san{
+            color: orangered;
+            font-size:xx-large ;
+            text-align: center;
+        }
+        .top{
+            color: aliceblue;
+            text-align: center;
+            margin-top: 0%;
+            margin-bottom: 0%;
+        }
+        .by{
+            color: orangered;
+            font-size: x-large;
+            text-align: center;
+        }
+        .art{
+            
+            object-position: right;
+            margin-bottom: 0%;
+            margin-top: 0%;
+        }
+        
+            
+            
+            
+        }
+        .au{
+            color:orangered ;
+            text-align: center;
+            font-size: larger;
+        }
+        .ice{
+            color: aliceblue;
+            text-align: center;
+            margin-top: -20%;
+            margin-bottom: 15%;
+        }
+        .red{
+            color: orangered;
+            font-size: larger;
+            text-align: center;
+        }
+        .rr{
+            color: orangered;
+            font-size: xx-large;
+            text-align: center;
+        }
+        .tt{
+            color: yellow;
+            font-size: medium;
+            text-align: center;
+        }
+        .ru{
+            margin-bottom: 0;
+            margin-top: -11%;
+            margin-left: 17%;
+        }
+        .art{
+            margin-bottom: 0;
+            margin-top: -19%;
+            margin-left: 30%;
+            
+        }
+        .choi{
+            background-color: yellow;
+            color: black;
+            font-size: larger;
+            border-radius: 9rem;
+            box-shadow: inset;
+            text-align: center;
+            padding: 10px 20px;
+            justify-content: center;
+            margin-left: 43%;
+            margin-top:- 70%;
+            
+            
+        }
+        .choi:hover{
+            background-color:yellowgreen;
+        }
+        
+        
+    </style>
+</head>
+<div>
+
+<body class="me">
+    <p class="you">
+        TRICK OR TREAT
+    </p>
+    
+    
+   
+    
+    <div class="rc">
+        
+        
+        <p class="san">
+            MENU:
+        </p>
+        <p class="vk">
+            COFFE:
+        
+        <p>
+            Cafe latte - $15 
+            <input type="checkbox">
+            
+            <p>
+                
+            Cappucino  - $15
+            <input type="checkbox" class="price-item" value="15">
+            <P>
+                Mochacino    -$15
+                <input type="checkbox" class="price-item" value="15">
+                <P>
+                    Americano   -$15
+                    <input type="checkbox" class="price-item" value="15">
+                </P>
+            </P>
+            </p>
+        </p>
+        
+    </p>
+    </div>
+
+
+
+    <div class="top">
+        <p class="by">
+            NON-COFFE:
+            <p>
+                
+                Choclate ice   - $16
+                <input type="checkbox" class="price-item" value="16">
+                <p>
+                    
+                    Red  Velvet   -  $12
+                    <input type="checkbox" class="price-item" value="12">
+                    <p>
+                        
+                        Blue Mojito   -$30
+                        <input type="checkbox" class="price-item" value="30">
+                        <p>
+                            
+                            Hazelnut  latte-$33
+                            <input type="checkbox" class="price-item" value="33">
+                        </p>
+                    </p>
+                </p>
+            </p>
+        </p>
+
+
+    </div>
+    
+    
+    <img class="ru" src="https://i.pinimg.com/236x/37/83/52/378352a69307dd1e87b0a85226cc5915.jpg" alt="">
+
+
+
+
+   
+
+    
+
+    <img class="art" src="https://i.pinimg.com/474x/b9/80/69/b98069f71c5baec65986fe803d879c9e.jpg" alt="">
+    
+
+    <div class="ice">
+        <p class="red">
+            ADD-ONES
+            <p>
+                Extra ice   - $14
+                <input type="checkbox" class="price-item" value="14">
+                <p>
+                    Extra syrup  -  $34
+                    <input type="checkbox" class="price-item" value="34">
+                    <p>
+                        Ice cream  - $34
+                        <input type="checkbox" class="price-item" value="34">
+                        <p>
+                            Extra espresso  - $ 33
+                            <input type="checkbox" class="price-item" value="33">
+                        </p>
+                    </p>
+                </p>
+            </p>
+             
+        </p>
+
+    </div> 
+    <button class="choi" onclick="calculateTotal()">Show Total Amount</button>
+    
+   <footer class="rr">We Serve Until
+    <p class="tt">
+        9.00am-10.00am
+    </p>
+  
+
+
+    
+    <script>
+function calculateTotal() {
+      const items = document.querySelectorAll('.price-item:checked');
+      let total = 0;
+
+      // Loop through selected items and sum up their values
+      items.forEach(item => {
+        total += parseFloat(item.value);
+      });
+
+      // Show the total amount in a popup
+      alert(`The total amount is $${total.toFixed(2)}`);
+    }
+
+    </script>
+   </footer> 
+</body>
+</div>
+</html>
